@@ -1,21 +1,17 @@
+import java.util.*;
+
 class Solution {
     public String solution(String s) {
         String answer = "";
         
         String[] str = s.split(" ");
-        int min = Integer.parseInt(str[0]);
-        int max = Integer.parseInt(str[0]);
-        int valInt = 0;
-        for (String val : str) {
-            valInt = Integer.parseInt(val);
-            if (valInt < min) {
-                min = valInt;
-            } else if (valInt > max) {
-                max = valInt;
-            }
-        }
+        List<Integer> list = new ArrayList<>();
+        for (String item : str)
+            list.add(Integer.parseInt(item));
         
-        answer = min + " " + max; 
+        Collections.sort(list);
+        
+        answer = list.get(0) + " " + list.get(list.size()-1);
         
         return answer;
     }
