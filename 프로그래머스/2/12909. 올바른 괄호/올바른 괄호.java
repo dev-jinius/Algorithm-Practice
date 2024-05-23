@@ -3,17 +3,21 @@ import java.util.*;
 class Solution {
     boolean solution(String s) {
         
-        int count = 0; 
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == '(') {
-                count += 1;
-            } else {
-            	if (count == 0) return false;
-            	count -= 1;
+        var stack = new Stack<Character>();
+        
+        var chars = s.toCharArray();
+        
+        for (char c : chars) {
+            if (c == '(') {
+                stack.push(c);
+                continue;
             }
+            
+            if (stack.isEmpty()) return false;
+            
+            stack.pop();
         }
         
-        if (count == 0) return true;
-        else return false;
+        return stack.isEmpty();
     }
 }
