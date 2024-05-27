@@ -4,23 +4,24 @@ class Solution {
     public int solution(int[] scoville, int K) {
         int answer = 0;
         
-        PriorityQueue<Integer> pq = new PriorityQueue<>();
-        for (int s : scoville) {
-            pq.offer(s);
+        List<Integer> list = new LinkedList<>();
+        for (int n : scoville) {
+            list.add(n);
         }
         
-        int mix = 0;
-        int first = 0;
-        int second = 0;
-        while (pq.peek() < K) {            
-            first = pq.poll();
-            second = pq.poll();
-            mix = first + second*2;
-            pq.offer(mix);
-            answer++;
+        int mixed = 0;
+        while (true) {
             
-            if (pq.peek() >= K) return answer;
-            if (pq.size() == 1) return -1;
+            Collections.sort(list);
+            if (list.get(0) >= K) break;
+            if (list.size() == 1) return -1;
+            
+            mixed = list.get(0) + list.get(1)*2;
+            if (mixed < K && list.size() == 2) return -1;
+            list.remove(0);
+            list.remove(0);
+            list.add(mixed);
+            answer++;
         }
         
         return answer;
