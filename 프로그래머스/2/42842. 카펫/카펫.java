@@ -6,6 +6,8 @@ class Solution {
         
         int totalCount = brown + yellow;
         Map<Integer, Integer> numMap = new HashMap<>();
+        // 전체 개수의 약수 구함.
+        // 전체 개수의 3 ~ 제곱근까지 반복 => 제곱근 이후에는 가로와 세로 값이 반전되기 때문.
         for (int i = 3; i*i<= totalCount; i++) {
             if (totalCount % i == 0) {
 				numMap.put(i, totalCount/i);                
@@ -18,7 +20,8 @@ class Solution {
             int garo = numMap.get(n);
             if (garo * 2 >= brown) continue;
             else {
-                if((brown-garo*2) % (sero-2) == 0 || yellow % sero == 0) {
+                if ((garo - 2) * (sero - 2) == yellow) {
+                //if((brown-garo*2) % (sero-2) == 0 || yellow % sero == 0) {
                     answer[0] = garo;
                     answer[1] = sero;
                     break;
