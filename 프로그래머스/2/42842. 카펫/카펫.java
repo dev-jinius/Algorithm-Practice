@@ -13,6 +13,7 @@ class Solution {
         }
         
         for (int n : numMap.keySet()) {
+            //가로 길이가 세로 길이보다 같거나 길다 조건 => 세로가 더 짧다. key 순서대로 돌아가므로 키는 세로. 값은 가로다.
             int sero = n;
             int garo = numMap.get(n);
             if (garo * 2 >= brown) continue;
