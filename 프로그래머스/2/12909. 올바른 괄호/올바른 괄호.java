@@ -8,13 +8,14 @@ class Solution {
         
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
-            if (c == ')') {
-                if (stack.isEmpty() || stack.peek() == ')') return false;
-                stack.pop();
-            } else {
-            	if (!stack.isEmpty() && stack.peek() == ')') return false;
+            if (c == '(') {
                 stack.push(c);
+                continue;
             }
+            
+            if (stack.isEmpty()) return false;
+            
+            stack.pop();
         }
 			
         return stack.isEmpty();
