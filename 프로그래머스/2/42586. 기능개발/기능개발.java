@@ -2,35 +2,28 @@ import java.util.*;
 
 class Solution {
     public int[] solution(int[] progresses, int[] speeds) {
-        int[] answer;
-		
-        int max = 0;
-        int count = 0;
-        int deploy = 0;
-       	List<Integer> counts = new ArrayList<>();
+        int[] answer = {};
         
+        List<Integer> result = new ArrayList<>();
+        Deque<Integer> deque = new ArrayDeque<>();
+        
+        int deploy = 0;
         for (int i = 0; i < progresses.length; i++) {
-            deploy = (100-progresses[i])%speeds[i]==0 ? (100-progresses[i])/speeds[i] : (100-progresses[i])/speeds[i] + 1;  
-            if (max == 0) {
-                max = deploy;
-            } 
-            
-            if (deploy <= max) {
-                count += 1;
-            } else {
-                counts.add(count);  
-                max = deploy;
-                count = 1;
-            }
-            
-            if (i == progresses.length - 1) {
-                counts.add(count);
-                break;
-            }
+            deploy = (100-progresses[i])%speeds[i] == 0 ? (100-progresses[i])/speeds[i] : (100-progresses[i])/speeds[i]+1;
+                
+            deque.offer(deploy);
         }
         
-        answer = counts.stream().mapToInt(Integer::intValue).toArray();
+        while (!deque.isEmpty()) {
+            int day = deque.pollFirst();
+            int count = 1;
+            while (!deque.isEmpty() && deque.peek() <= day) {
+				count++;
+                deque.poll();
+            }
+            result.add(count);
+        }
         
-        return answer;
+        return result.stream().mapToInt(i -> i).toArray();
     }
 }
