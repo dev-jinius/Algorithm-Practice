@@ -6,7 +6,7 @@ class SeatManager {
     public SeatManager(int n) {
         seats = new PriorityQueue<>();
         for (int i = 1; i <= n; i++)
-            seats.add(i);
+            seats.offer(i);
     }
     
     public int reserve() {
@@ -14,7 +14,7 @@ class SeatManager {
     }
     
     public void unreserve(int seatNumber) {
-        seats.add(seatNumber);
+        seats.offer(seatNumber);
     }
 }
 
