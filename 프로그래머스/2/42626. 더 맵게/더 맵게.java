@@ -1,29 +1,23 @@
-import java.util.*;
+import java.util.PriorityQueue;
 
 class Solution {
     public int solution(int[] scoville, int K) {
-        int answer = 0;
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for(int scov : scoville) 
+            pq.add(scov);
+       
+        int count = 0;
+        int current = -1;
         
-        List<Integer> list = new LinkedList<>();
-        for (int n : scoville) {
-            list.add(n);
+        while (pq.peek() < K) {
+            if (pq.size() == 1) return -1;
+            
+            current = pq.poll();
+            current = current + (pq.poll()*2);
+            pq.add(current);
+            count++;
         }
         
-        int mixed = 0;
-        while (true) {
-            
-            Collections.sort(list);
-            if (list.get(0) >= K) break;
-            if (list.size() == 1) return -1;
-            
-            mixed = list.get(0) + list.get(1)*2;
-            if (mixed < K && list.size() == 2) return -1;
-            list.remove(0);
-            list.remove(0);
-            list.add(mixed);
-            answer++;
-        }
-        
-        return answer;
+        return count;
     }
 }
