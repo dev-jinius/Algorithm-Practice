@@ -1,7 +1,8 @@
+import java.util.Queue;
 import java.util.PriorityQueue;
 
 class SeatManager {
-    PriorityQueue<Integer> seats;
+    Queue<Integer> seats;
 
     public SeatManager(int n) {
         seats = new PriorityQueue<>();
