@@ -1,10 +1,10 @@
--- 코드를 작성해주세요
-
-SELECT COUNT(ID) AS FISH_COUNT, MAX(LENGTH) AS MAX_LENGTH, FISH_TYPE
-  FROM FISH_INFO
- WHERE FISH_TYPE IN (SELECT FISH_TYPE 
-                       FROM FISH_INFO
-                      GROUP BY FISH_TYPE
-                     HAVING AVG(CASE WHEN LENGTH <= 10 THEN 10 ELSE LENGTH END) >= 33)
- GROUP BY FISH_TYPE
- ORDER BY FISH_TYPE
+SELECT Count(*)    FISH_COUNT,
+       Max(length) MAX_LENGTH,
+       fish_type
+FROM   fish_info
+GROUP  BY fish_type
+HAVING Avg(CASE
+             WHEN length > 10 THEN length
+             ELSE 10
+           end) >= 33
+ORDER  BY fish_type
