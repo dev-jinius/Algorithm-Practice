@@ -6,30 +6,32 @@ class Solution {
         
         int min = 1;
         int max = Arrays.stream(diffs).max().getAsInt();
-        answer = max;
+        
+        System.out.println(min);
+        System.out.println(max);
         
         while (min <= max) {
             int level = (min+max)/2;
-            long total = 0;
+            System.out.println("answer : " + answer);
+            System.out.println("level : " + level);
+            System.out.println("min : " + min + " , max : " + max);
+
+            int total = 0;
             for (int i = 0; i < diffs.length; i++) {
                 if (diffs[i] <= level) {
                     total += times[i];
-                } else {
-                    total += (long) (times[i-1] + times[i]) * (diffs[i] - level) + times[i]; 
+                    continue;
                 }
-
-                // 제한 시간을 초과하면 중단
-                if (total > limit) {
-                    break;
-                }
+                total += i == 0 ? times[i] : (times[i-1] + times[i])*(diffs[i]-level) + times[i];
             }
             
-            if (total <= limit) {
-                answer = Math.min(answer, level);
-                max = --level;
-            } else {
-                min = ++level;
+            if ((long)total >= limit) {
+                min = level+1;
+                continue;
             }
+            
+            answer = Math.min(level, max);
+            max = level-1;
         }
         
         return answer;
