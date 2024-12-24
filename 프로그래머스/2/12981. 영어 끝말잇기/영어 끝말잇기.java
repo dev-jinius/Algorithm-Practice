@@ -1,7 +1,5 @@
 import java.util.*;
 
-import java.util.*;
-
 class Solution {
     public int[] solution(int n, String[] words) {        
         Set<String> record = new HashSet<>();
